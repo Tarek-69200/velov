@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Affichage des stations Velov à Lyon</title>
+  <link rel="icon" type="image/png" href="./assets/icons/velo-de-montagne.png" /> <!-- Importation de l'image -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" /> <!-- Importation  -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet"> <!-- Importation de la police -->
+  <link rel="stylesheet" href="./assets/styles/style.css"/> <!-- Importation du fichier CSS --> 
+ 
+</head>
+
+<header>
+  <h1> Affichage des Velov dans la ville de Lyon </h1>
+  <p> L'application fonctionne avec deux web services qui utilisent le protocole HTTP </p>
+</header>
+
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
+  <script defer src="./assets/scripts/main.js"></script> <!-- Importation du fichier JS -->
+
+  <script>
+    // Géolocalisation de l'utilisateur avec une promesse (navigator.geolocation) pour afficher sa position sur la carte
+
+    if ('geolocation' in navigator) { 
+      navigator.geolocation.getCurrentPosition(position => {
+        const userPosition = [position.coords.latitude, position.coords.longitude]; // Récupération des coordonnées de l'utilisateur
+        const marker = L.marker(userPosition) // Affichage du marqueur sur la carte
+          .addTo(map) // Ajout du marqueur sur la carte
+          .bindPopup('Vous êtes ici'); // Affichage d'un message pour indiquer la position de l'utilisateur
+      });
+    } else {
+      console.log('La géolocalisation n\'est pas disponible'); // Affichage d'un message d'erreur si la géolocalisation n'est pas disponible
+    }
+
+  </script>
+
+  <footer>
+    <p>Projet réalisé par <a href="https://www.linkedin.com/in/tarek-nordine-taguine/">TAGUINE Tarek</a> dans le cadre d'un projet perso.</p>
+  </footer>
+</body>
+</html>
